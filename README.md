@@ -4,7 +4,7 @@
 
 ### Getting the Spark files
 
-```text
+
 Steps:
 Get the necessary Spark version file from the website at Apache Spark Downloads.
 
@@ -21,7 +21,7 @@ Copy and replace the following files (hadoop.dll and winutils.exe) in the hadoop
 
 pip install -r requirements.txt
 set $SPARK_HOME environment variable = "C:\spark_setup\spark-3.3.0-bin-hadoop2"
-```
+
 
 ### download data from kaggle
 
