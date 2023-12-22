@@ -1,0 +1,7 @@
+data:
+  kaggle: "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce"
+
+spark:
+  partition_by: ["product_category_name_english"]
+  output_path: output_path
+  input_path: brazilian-ecommerce
