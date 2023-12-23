@@ -4,7 +4,6 @@
 
 ### Getting the Spark files
 
-
 Steps:
 Get the necessary Spark version file from the website at Apache Spark Downloads.
 
@@ -22,17 +21,20 @@ Copy and replace the following files (hadoop.dll and winutils.exe) in the hadoop
 pip install -r requirements.txt
 set $SPARK_HOME environment variable = "C:\spark_setup\spark-3.3.0-bin-hadoop2"
 
+## Run
 
-### download data from kaggle
+### kaggle config
 
 ```text
 create a kaggle.json file like {"username":"papazerveas","key":"xxxxx"}
+or download it from kaggle
 ```
 
 ### run the etl pipeline
 
 ```cmd
-python run_etl_pyspark.py 
+help: python run_etl_pyspark.py --help
+run: python run_etl_pyspark.py --download_data True --config config.yml
 ```
 
 ### testing
