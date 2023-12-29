@@ -33,13 +33,12 @@ if __name__ == "__main__":
     # ETL processing
     forecast_ts = preprocess_data(customers, orders, order_items, products, translations)
 
-
+    calc_skew(forecast_ts, col= ['product_category_name_english']) # 7.172007821761112
+    calc_skew(forecast_ts, col= ['order_purchase_week_end_sunday'])  # 2.789086008976788
+    calc_skew(forecast_ts, col= ['order_purchase_week_end_sunday','product_category_name_english']) # 17.407835945652945
     # Save to Parquet
     save_to_parquet(
         df=forecast_ts,
-        output_path= spark_config.get("output_path",'output_path'), 
-        partition_by = spark_config.get("partition_by",['product_category_name_english']) 
+        output_path= spark_config.get("output_path",'output_path'),
+        partition_by = spark_config.get("partition_by",['order_purchase_week_end_sunday'])
         )
-
-
-
