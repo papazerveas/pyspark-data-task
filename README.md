@@ -80,3 +80,9 @@ python -m pytest
 |                    2018-01-21|11250b0d4b709fee9...|         agro_industry_and...|              amparo|            SP|      412.0|          1|        27.72|
 +------------------------------+--------------------+-----------------------------+--------------------+--------------+-----------+-----------+-------------+
 only showing top 20 rows
+
+### github actions
+
+Go to "Settings" > "Secrets" > Actions > "New repository secret."
+KAGGLE_USERNAME
+KAGGLE_KEY
