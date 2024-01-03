@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 import data_task.etl_process_pyspark as etl
-from data_task.tools import Dataset
+from data_task.tools import Dataset,get_config
 
 # use fast true for development.
 fast_test = False
@@ -24,7 +24,8 @@ class PySparTestCase(unittest.TestCase):
         else:
             cls.spark = etl.create_spark_session(
                 "unit-test")  # no point to test connection
-            d = Dataset()
+            cls.config = get_config(yml_file="config-test.yml")
+            d = Dataset(config=cls.config)
             d.download()  # download data on startup
 
     @classmethod

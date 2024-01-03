@@ -33,7 +33,6 @@ if __name__ == "__main__":
     # ETL processing
     forecast_ts = preprocess_data(customers, orders, order_items, products, translations)
 
-    forecast_ts.show()
     # Save to Parquet
     save_to_parquet(
         df=forecast_ts,

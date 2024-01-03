@@ -4,4 +4,4 @@ data:
 spark:
   partition_by: ["order_purchase_week_end_sunday"]
   output_path: output_path
-  input_path: brazilian-ecommerce
+  input_path: brazilian-ecommerce-sample
