@@ -1,0 +1,2 @@
+"order_id","customer_id","order_status","order_purchase_timestamp","order_approved_at","order_delivered_carrier_date","order_delivered_customer_date","order_estimated_delivery_date"
+"00e7ee1b050b8499577073aeb2a297a1","06b8999e2fba1a1fbc88172c00ba8bc7",delivered,2017-05-16 15:05:35,2017-05-16 15:22:12,2017-05-23 10:47:57,2017-05-25 10:35:35,2017-06-05 00:00:00

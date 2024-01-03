@@ -1,0 +1,5 @@
+[flake8]
+ # local variable '_df_mock' is assigned to but never used
+# ignore = F841
+# Increase max line length to 120
+max-line-length = 120
