@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+env:
+  KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+  KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -26,10 +30,11 @@ jobs:
     - name: Run code linter
       run: flake8
 
+    - name: Print KAGGLE_USERNAME
+      run: echo "Hello $KAGGLE_USERNAME"
+
     - name: Run tests
       run: pytest
-      env:
-        KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-        KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+
 
 
