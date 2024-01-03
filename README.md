@@ -54,6 +54,20 @@ python -m pytest
 
 ### output schema
 
+```sh
+
+>>> forecast_ts.printSchema()
+root
+ |-- order_purchase_week_end_sunday: date (nullable = true)
+ |-- product_id: string (nullable = true)
+ |-- product_category_name_english: string (nullable = true)
+ |-- customer_city: string (nullable = true)
+ |-- customer_state: string (nullable = true)
+ |-- sales_value: double (nullable = true)
+ |-- sales_items: long (nullable = false)
+ |-- shipping_cost: double (nullable = true)
+
+
 >>> forecast_ts.show()
 +------------------------------+--------------------+-----------------------------+--------------------+--------------+-----------+-----------+-------------+
 |order_purchase_week_end_sunday|          product_id|product_category_name_english|       customer_city|customer_state|sales_value|sales_items|shipping_cost|
@@ -80,6 +94,7 @@ python -m pytest
 |                    2018-01-21|11250b0d4b709fee9...|         agro_industry_and...|              amparo|            SP|      412.0|          1|        27.72|
 +------------------------------+--------------------+-----------------------------+--------------------+--------------+-----------+-----------+-------------+
 only showing top 20 rows
+```
 
 ### github actions
 
