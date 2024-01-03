@@ -3,14 +3,14 @@ import opendatasets as od
 import yaml
 
 
-def get_config(yml_file = 'config.yml') -> Dict:
-    with open(yml_file, 'r') as file:
+def get_config(yml_file='config.yml') -> Dict:
+    with open(file=yml_file, mode='r', encoding='utf8') as file:
         return yaml.safe_load(file)
 
 
 class Dataset():
 
-    def __init__(self, config = get_config()) -> None:
+    def __init__(self, config=get_config()) -> None:
         self.__config: Union[Dict, None] = config.get("data")
 
     def download(self) -> None:

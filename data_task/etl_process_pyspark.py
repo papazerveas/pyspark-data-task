@@ -8,7 +8,10 @@ def create_spark_session(name: str = "SalesForecastingEtl") -> SparkSession:
     return SparkSession.builder.appName(name).getOrCreate()
 
 
-def load_data(spark: SparkSession, path: str = 'brazilian-ecommerce') -> Tuple[DataFrame, DataFrame, DataFrame, DataFrame, DataFrame]:
+def load_data(
+        spark: SparkSession,
+        path: str = 'brazilian-ecommerce') -> Tuple[
+            DataFrame, DataFrame, DataFrame, DataFrame, DataFrame]:
     """
         Load relevant tables
     """
@@ -126,10 +129,12 @@ def preprocess_data(
         # maybe unavailable is reasonable for demand forecasting
         .filter(~col("order_status").isin(["canceled", "unavailable"]))
         # usually for week forecasting we use week end sunday
-        .withColumn("order_purchase_week_end_sunday", next_day(date_trunc("week", col("order_purchase_timestamp")), "Sun"))
-        .select("order_id", "customer_id",  "order_purchase_week_end_sunday")
+        .withColumn("order_purchase_week_end_sunday", next_day(
+            date_trunc("week", col("order_purchase_timestamp")), "Sun"))
+        .select("order_id", "customer_id", "order_purchase_week_end_sunday")
     )  # DataFrame[order_id: string, customer_id: string, order_purchase_week_end_sunday: date
 
+    # DataFrame[order_id: string, product_id: string, sales_value: double, sales_items: bigint, shipping_cost: double]
     order_items_agg = (
         order_items.groupBy(["order_id", "product_id"])  # ,"seller_id"
         .agg(
@@ -137,7 +142,7 @@ def preprocess_data(
             count("price").alias("sales_items"), sum(
                 "freight_value").alias("shipping_cost")
         )
-    )  # DataFrame[order_id: string, product_id: string, sales_value: double, sales_items: bigint, shipping_cost: double]
+    )
 
     products_en = (
         products
@@ -186,14 +191,10 @@ def preprocess_data(
         )
     )
 
-    # check for skew and appropriate partitioning of product level - category seems less skewed
-    # calc_skew(forecast_ts,"product_id") # Skewness Metric: 136.67372516438869
-    # calc_skew(forecast_ts,"product_category_name_english") # Skewness Metric: 7.172007821761112
-    # calc_skew(forecast_ts,["product_category_name_english", "product_id"]) # Skewness Metric: 136.67372516438869
-
     # forecast_ts.groupBy("product_id").count().describe().show()
     # forecast_ts.groupBy("product_id").count().select("count").rdd.flatMap(lambda x: x).histogram(10)
-    # hist_values, bin_edges = forecast_ts.groupBy("product_category_name_english").count().select("count").rdd.flatMap(lambda x: x).histogram(10)
+    # hist_values, bin_edges = forecast_ts.groupBy(
+    #   "product_category_name_english").count().select("count").rdd.flatMap(lambda x: x).histogram(10)
     # plt.figure(figsize=(10, 6))
     # plt.bar(bin_edges[:-1], hist_values, width=(bin_edges[1] - bin_edges[0]), color='blue')
     # forecast_ts.groupBy("product_category_name_english").count().describe().show()
@@ -202,19 +203,19 @@ def preprocess_data(
         forecast_data
         .sort([
             "product_category_name_english",
-             "product_id",
-             "customer_state",
-             "customer_city",
-             "order_purchase_week_end_sunday"
-             ])
+            "product_id",
+            "customer_state",
+            "customer_city",
+            "order_purchase_week_end_sunday"
+        ])
     )
 
 
 def save_to_parquet(
-        df: DataFrame,
-        output_path: str,
-        partition_by: Union[List[str],str] = 'product_id'
-    ) -> None:
+    df: DataFrame,
+    output_path: str,
+    partition_by: Union[List[str], str] = 'product_id'
+) -> None:
     """
     Save the processed df to Parquet, partitioned by product
     """
@@ -223,8 +224,8 @@ def save_to_parquet(
 
 def calc_skew(
     df: DataFrame,
-    col: Union[List[str],str]="product_id"
-    ) -> float:
+    col: Union[List[str], str] = "product_id"
+) -> float:
     """calculate skew of a partition"""
 
     # get count per column

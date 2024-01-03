@@ -73,7 +73,8 @@ class TestAppendData(PySparTestCase):
         # don't export
         df_patch = patch(
             'pyspark.sql.DataFrameWriter.parquet', return_value=None)
-        df_mock = df_patch.start()
+        _df_mock = df_patch.start()
+        # flake8: noqa F401
         etl.save_to_parquet(product_weekly_sales,
                             "test_output", partition_by=["id"])
         df_patch.stop()
