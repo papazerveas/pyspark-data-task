@@ -23,11 +23,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Run code linter
+      run: flake8
+
     - name: Run tests
       run: pytest
       env:
         KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
         KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
 
-    - name: Run Flake8
-      run: flake8
+
